@@ -36,14 +36,15 @@ module.exports = {
   */
   devModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    // '@nuxtjs/eslint-module'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
@@ -60,6 +61,15 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    }
+  },
+  proxy:{
+    "/api/":{
+    target:"http://localhost:7001",
+    secure:false,//安全策略
+    pathRewrite:{
+      '^/api':"",//相当于api只是用来做转发的规则使用
+    }
     }
   }
 }
